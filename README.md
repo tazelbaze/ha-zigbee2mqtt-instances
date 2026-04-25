@@ -19,7 +19,7 @@ Le workflow tourne toutes les 30 minutes et met à jour la version si une nouvel
 Paramètres → Modules complémentaires → Dépôts → ajouter :
 
 ```
-https://github.com/TON_USER/hassio-z2m-multi
+https://github.com/tazelbaze/hassio-z2m-multi
 ```
 
 ## Mise à jour manuelle
