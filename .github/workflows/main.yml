@@ -1,0 +1,13 @@
+name: Multiple Zigbee2mqtt Home Assistant add-ons
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andreypolyak/zigbee2mqtt-multi-addon-action@v1.0
+        with:
+          addon_names: "Zigbee2MQTT 4"
+          github_token: ${{ github.token }}
