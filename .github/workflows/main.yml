@@ -3,10 +3,13 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: andreypolyak/zigbee2mqtt-multi-addon-action@v1.0
         with:
           addon_names: "Zigbee2MQTT 4"
