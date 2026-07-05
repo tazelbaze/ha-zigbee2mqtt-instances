@@ -56,8 +56,17 @@
    "options": "-d -d",
    "log": false
   },
-  "mqtt": {},
-  "serial": {}
+  "mqtt": {
+   "server": "mqtt://192.168.0.12:1883",
+   "user": "mqtt_user",
+   "password": "mqtt_user",
+   "base_topic": "zigbee2mqtt-3"
+  },
+  "serial": {
+   "port": "tcp://192.168.0.17:6640",
+   "adapter": "zstack",
+   "baudrate": 115200
+  }
  },
  "schema": {
   "data_path": "str",
