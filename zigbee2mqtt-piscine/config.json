@@ -1,7 +1,7 @@
 {
   "name": "Zigbee2MQTT - Piscine",
   "version": "2.12.1-1",
-  "slug": "zigbee2mqtt_zigbee2mqtt_4",
+  "slug": "zigbee2mqtt_piscine",
   "description": "Use your ZigBee devices without the vendor's bridge or gateway (Piscine)",
   "breaking_versions": [
     "2.0.0-1"
