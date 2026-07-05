@@ -1,16 +1,32 @@
-name: Multiple Zigbee2mqtt Home Assistant add-ons
+name: Bump Zigbee2MQTT addon versions
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 6 * * *'
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  sync:
+  bump:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: andreypolyak/zigbee2mqtt-multi-addon-action@v1.0
-        with:
-          addon_names: "Zigbee2MQTT 4"
-          github_token: ${{ github.token }}
+      - name: Get latest official Z2M addon version
+        id: latest
+        run: |
+          VERSION=$(curl -s https://raw.githubusercontent.com/zigbee2mqtt/hassio-zigbee2mqtt/master/zigbee2mqtt/config.json | jq -r .version)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Bump version field only in each addon folder
+        run: |
+          for dir in zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine; do
+            if [ -f "$dir/config.json" ]; then
+              jq --arg v "${{ steps.latest.outputs.version }}" '.version = $v' "$dir/config.json" > "$dir/config.json.tmp"
+              mv "$dir/config.json.tmp" "$dir/config.json"
+            fi
+          done
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine
+          git diff --cached --quiet || git commit -m "Bump Zigbee2MQTT version to ${{ steps.latest.outputs.version }}"
+          git push
