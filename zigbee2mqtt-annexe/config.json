@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2MQTT - Annexe",
-  "version": "2.13.0-1",
+  "version": "2.14.0-1",
   "slug": "zigbee2mqtt_annexe",
   "description": "Use your ZigBee devices without the vendor's bridge or gateway (Annexe)",
   "breaking_versions": [
