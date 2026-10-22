@@ -17,7 +17,7 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Bump version field only in each addon folder
         run: |
-          for dir in zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine; do
+          for dir in zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine zigbee2mqtt-chambres-rdc; do
             if [ -f "$dir/config.json" ]; then
               jq --arg v "${{ steps.latest.outputs.version }}" '.version = $v' "$dir/config.json" > "$dir/config.json.tmp"
               mv "$dir/config.json.tmp" "$dir/config.json"
@@ -27,6 +27,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine
+          git add zigbee2mqtt-rdc zigbee2mqtt-etage zigbee2mqtt-annexe zigbee2mqtt-piscine zigbee2mqtt-chambres-rdc
           git diff --cached --quiet || git commit -m "Bump Zigbee2MQTT version to ${{ steps.latest.outputs.version }}"
           git push
